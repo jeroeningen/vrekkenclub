@@ -31,6 +31,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 gem "haml"
 gem "simple_form"
+gem "bootstrap"
+gem 'tinymce-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

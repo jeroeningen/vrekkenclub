@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+%html
+  %head
+    %title Vrekkenclub
+    = csrf_meta_tags
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+  %body
+    .container
+      %header 
+        %h1 Vrekkenclub
+      - unless request.path.start_with?("/beheren")
+        .row
+          %ul.nav.nav-pills
+            %li.nav-item
+              = link_to "Home", "/", class: request.path != "/wie-ben-ik" ? "nav-link active" : "nav-link"
+            %li.nav-item
+              = link_to "Wie ben ik", "/wie-ben-ik", class: request.path != "/wie-ben-ik" ? "nav-link" : "nav-link active"
+      .row
+        - unless request.path.start_with?("/beheren")
+          .col-2
+            %ul.nav.flex-column
+              - @categories.each do |category|
+                %li.nav-item
+                  = category.name
+                  - category.articles.each do |article|
+                    %ul.nav.flex-column
+                      .row
+                        .col-1 &nbsp;
+                        .col-9
+                          %li.nav-item
+                            = link_to article.title, article_path(article.title), class: "active"
+            
+        .col-8= yield
+
+= tinymce
