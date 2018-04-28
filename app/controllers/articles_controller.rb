@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = Article.find_by(title: params[:titel])  
+    @article = Article.find_by(title: params[:titel].gsub(/-/, " "))  
   end
 
   private

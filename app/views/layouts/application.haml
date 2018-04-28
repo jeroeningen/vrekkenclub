@@ -15,7 +15,7 @@
         .row
           %ul.nav.nav-pills
             %li.nav-item
-              = link_to "Home", "/", class: request.path != "/wie-ben-ik" ? "nav-link active" : "nav-link"
+              = link_to "Home", "/", class: request.path == "/" ? "nav-link active" : "nav-link"
             %li.nav-item
               = link_to "Wie ben ik", "/wie-ben-ik", class: request.path != "/wie-ben-ik" ? "nav-link" : "nav-link active"
       .row
@@ -26,12 +26,12 @@
                 %li.nav-item
                   = category.name
                   - category.articles.each do |article|
-                    %ul.nav.flex-column
+                    %ul.nav.flex-column.nav-pills
                       .row
                         .col-1 &nbsp;
                         .col-9
                           %li.nav-item
-                            = link_to article.title, article_path(article.title), class: "active"
+                            = link_to article.title, article_path(article.title.gsub(/ /, "-")), class: request.path.ends_with?(article.title.gsub(/ /, "-")) ? "nav-link active" : "nav-link"
             
         .col-8= yield
 
